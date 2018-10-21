@@ -1,0 +1,65 @@
+﻿@page
+@model IndexModel
+@{
+    Layout = null;
+}
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset='utf-8' />
+    <title>Airport Explorer</title>
+    <meta name='viewport' content='initial-scale=1,maximum-scale=1,user-scalable=no' />
+    <link href='https://api.tiles.mapbox.com/mapbox-gl-js/v0.48.0/mapbox-gl.css' rel='stylesheet' />
+    <link href="https://cdn.jsdelivr.net/npm/tailwindcss/dist/tailwind.min.css" rel="stylesheet">
+    <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet" />
+    <link href="https://community.algolia.com/places/stylesheets/site-e7cc3a99.css" rel="stylesheet" />
+    <link href="~/css/site.min.css" rel="stylesheet" />
+    <link href="/airplane.png" rel="shortcut icon" />
+</head>
+<body>
+    <div id='map'></div>
+    <div class="absolute pin-t pin-r w-1/5 mt-4 mr-4">
+        <input type="search" id="place-input" class="form-control ap-input" placeholder="Where are we going ?" />
+    </div>
+    @*<div class="absolute pin-t pin-l w-1/5 mt-4 ml-4">
+        <label>Map Style</label>
+        <select id="mapStyleChanger">
+            <option value="0">basic</option>
+            <option value="1">streets</option>
+            <option value="2">bright</option>
+            <option value="3">light</option>
+            <option value="4">dark</option>
+            <option value="5">satellite</option>
+        </select>
+    </div>*@
+    <div id="info-card" class="absolute pin-t pin-l mt-4 ml-4 rounded shadow-lg bg-white" style="max-width: 400px; display: none;">
+        <div class="overflow-hidden" style="height:200px;">
+            <span class="absolute pin-t pin-r px-4 py-3">
+                <i id="info-card-close-button" class="fa fa-times" role="button" aria-hidden="true"></i>
+            </span>
+            <img id="airport-image" src="https://via.placeholder.com/400x200?text=Loading..." />
+        </div>
+        <div class="px-6 py-4">
+            <div id="airport-name" class="font-bold text-l"></div>
+            <div id="more-info" class="mt-8">
+                <div class="flex mb-4">
+                    <div class="w-10"><i class="fa fa-map-marker" aria-hidden="true"></i></div>
+                    <div id="airport-address" class="font-medium text-l mb-2 w-full"></div>
+                </div>
+                <div class="flex mb-4">
+                    <div class="w-10"><i class="fa fa-phone" aria-hidden="true"></i></div>
+                    <div id="airport-phone" class="font-medium text-l mb-2 w-full"></div>
+                </div>
+                <div class="flex mb-4">
+                    <div class="w-10"><i class="fa fa-link" aria-hidden="true"></i></div>
+                    <div id="airport-website" class="font-medium text-l mb-2 w-full"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <input type="hidden" id="mapboxtoken" value="@Model.MapboxAccessToken" />
+    <script src='https://api.tiles.mapbox.com/mapbox-gl-js/v0.48.0/mapbox-gl.js'></script>
+    <script src="https://cdn.jsdelivr.net/npm/places.js@1.9.1"></script>
+    <script src="~/js/index.min.js"></script>
+</body>
+</html>
